@@ -1,0 +1,20 @@
+import cv2
+
+image = cv2.imread(r"C:\Users\bolla\Downloads\tree_image.jpg")
+
+if image is None:
+    raise FileNotFoundError("Could not load the image. Check the file path.")
+
+flipped_image = cv2.flip(image, 1)
+rotated_image = cv2.rotate(flipped_image, cv2.ROTATE_180)
+
+cv2.imshow("Original Image", image)
+cv2.imshow("Flipped and Rotated 180 Degrees", rotated_image)
+
+# Save the result alongside the original image
+output_path = r"C:\Users\bolla\Downloads\rotated_image.jpg"
+if not cv2.imwrite(output_path, rotated_image):
+    raise OSError(f"Could not save the image to: {output_path}")
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
